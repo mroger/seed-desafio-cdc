@@ -52,6 +52,10 @@ public class Autor {
         }
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
     @Override
     public String toString() {
         return "Autor{" +
@@ -61,9 +65,5 @@ public class Autor {
             ", descricao='" + descricao + '\'' +
             ", registradoEm=" + registradoEm +
             '}';
-    }
-
-    public Long getId() {
-        return this.id;
     }
 }

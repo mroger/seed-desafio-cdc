@@ -1,7 +1,7 @@
 package br.com.roger.study.casadocodigo.controller;
 
-import br.com.roger.study.casadocodigo.controller.request.NovoAutorRequest;
-import br.com.roger.study.casadocodigo.model.Autor;
+import br.com.roger.study.casadocodigo.controller.request.NovaCategoriaRequest;
+import br.com.roger.study.casadocodigo.model.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -20,33 +20,30 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 
-/**
- * Carga intrinseca: 3
- */
 @RestController
-@RequestMapping(value = { "/autores" })
-public class AutorController {
+@RequestMapping(value = { "/categorias" })
+public class CategoriaController {
 
     @PersistenceContext
     private EntityManager em;
 
     @Autowired
-    @Qualifier("emailUniqueValidator")
-    private Validator emailUniqueValidator;
+    @Qualifier("categoriaUniqueValidator")
+    private Validator categoriaUniqueValidator;
 
     @InitBinder
     public void init(WebDataBinder webDataBinder) {
-        webDataBinder.addValidators(emailUniqueValidator);
+        webDataBinder.addValidators(categoriaUniqueValidator);
     }
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody @Valid final NovoAutorRequest request) {
+    public ResponseEntity<?> create(@RequestBody @Valid final NovaCategoriaRequest request) {
 
-        Autor novoAutor = request.toModel();
+        Categoria novaCategoria = request.toModel();
 
-        em.persist(novoAutor);
+        em.persist(novaCategoria);
 
-        return ResponseEntity.created(URI.create("/autores/" + novoAutor.getId())).build();
+        return ResponseEntity.created(URI.create("/categorias/" + novaCategoria.getId())).build();
     }
 }

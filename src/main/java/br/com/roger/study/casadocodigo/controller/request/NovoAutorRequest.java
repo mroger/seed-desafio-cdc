@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 /**
  * Carga intrinseca: 1
  */
-public class AutorRequest {
+public class NovoAutorRequest {
 
     @NotEmpty(message = "cdc.request.nome.obrigatorio")
     private String nome;
@@ -20,7 +20,7 @@ public class AutorRequest {
     @Length(max = 400, message = "cdc.request.descricao.maximo")
     private String descricao;
 
-    public AutorRequest(
+    public NovoAutorRequest(
             @NotEmpty(message = "cdc.request.nome.obrigatorio") String nome,
             @NotEmpty(message = "cdc.request.email.obrigatorio") @Email(message = "cdc.request.email.invalido") String email,
             @NotEmpty(message = "cdc.request.descricao.obrigatorio") @Length(max = 400, message = "cdc.request.descricao.maximo") String descricao) {
