@@ -19,20 +19,12 @@
             <column name="descricao" type="varchar(400)">
                 <constraints nullable="false"/>
             </column>
-            <column name="criado_em" type="timestamp">
+            <column name="registrado_em" type="timestamp">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
     </changeSet>
-    <changeSet id="202103282000" author="marcos">
-        <renameColumn tableName="autor" oldColumnName="criado_em" newColumnName="registrado_em" />
-    </changeSet>
-    <changeSet id="202103282009" author="marcos">
-        <createSequence sequenceName="hibernate_sequence" />
-    </changeSet>
-    <changeSet id="202103282012" author="marcos">
-        <dropSequence sequenceName="hibernate_sequence" />
-        <createSequence sequenceName="autor_sequence" />
+    <changeSet id="202103310018" author="marcos">
+        <createSequence sequenceName="autor_sequence" minValue="1" startValue="1" incrementBy="1" />
     </changeSet>
 </databaseChangeLog>

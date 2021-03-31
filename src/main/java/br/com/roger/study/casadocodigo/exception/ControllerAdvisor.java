@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Carga intrinseca: 3
+ * Carga intrinseca: 4
  */
 @ControllerAdvice(annotations = RestController.class)
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
@@ -49,16 +48,28 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(value = EmailNotUniqueException.class)
+    public ResponseEntity<?> handleEmailNotUniqueException(final EmailNotUniqueException ex) {
+        LOG.error("Email not unique: {}", ex.getEmail());
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST.value());
+        body.put("error", "Email not unique");
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDate.now());
+        body.put("timestamp", LocalDateTime.now());
         body.put("status", status.value());
 
         List<String> errors = ex.getBindingResult()
-            .getFieldErrors()
+            .getAllErrors()
             .stream()
             .map(DefaultMessageSourceResolvable::getDefaultMessage)
             .filter(Objects::nonNull)

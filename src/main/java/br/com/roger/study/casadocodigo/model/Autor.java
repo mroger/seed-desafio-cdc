@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
 
 /**
- * Carga intrinseca: 0
+ * Carga intrinseca: 1
  */
 @Entity
 public class Autor {
@@ -28,7 +28,10 @@ public class Autor {
     private String email;
     @NotEmpty @Length(max = 400)
     private String descricao;
-    private final Instant registradoEm;
+    private Instant registradoEm;
+
+    @Deprecated
+    public Autor() { }
 
     public Autor(@NotEmpty final String nome, @NotEmpty @Email final String email,
             @NotEmpty @Length(max = 400) final String descricao) {
@@ -58,5 +61,9 @@ public class Autor {
             ", descricao='" + descricao + '\'' +
             ", registradoEm=" + registradoEm +
             '}';
+    }
+
+    public Long getId() {
+        return this.id;
     }
 }
