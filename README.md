@@ -7,3 +7,8 @@ Durante cada uma das seis semanas eu vou pegar código por amostragem e analisar
 ### H2 Console
 
 http://localhost:8080/h2-console
+
+### Referências
+Hibernate Validator: https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/?v=6.1.7
+Validation, Data Binding, and Type Conversion: https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/validation.html
+

@@ -2,13 +2,8 @@ package br.com.roger.study.casadocodigo.controller;
 
 import br.com.roger.study.casadocodigo.controller.request.NovoAutorRequest;
 import br.com.roger.study.casadocodigo.model.Autor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Validator;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,15 +24,6 @@ public class AutorController {
 
     @PersistenceContext
     private EntityManager em;
-
-    @Autowired
-    @Qualifier("emailUniqueValidator")
-    private Validator emailUniqueValidator;
-
-    @InitBinder
-    public void init(WebDataBinder webDataBinder) {
-        webDataBinder.addValidators(emailUniqueValidator);
-    }
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

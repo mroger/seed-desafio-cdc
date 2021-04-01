@@ -3,7 +3,6 @@ package br.com.roger.study.casadocodigo.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,18 +47,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(value = EmailNotUniqueException.class)
-    public ResponseEntity<?> handleEmailNotUniqueException(final EmailNotUniqueException ex) {
-        LOG.error("Email not unique: {}", ex.getEmail());
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("error", "Email not unique");
-
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    }
-
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
@@ -71,9 +58,9 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
         List<String> errors = ex.getBindingResult()
             .getAllErrors()
             .stream()
-            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-            .filter(Objects::nonNull)
-            .map(messageCode -> messageSource.getMessage(messageCode, null, Locale.getDefault()))
+            .map(oe -> {
+                return messageSource.getMessage(Objects.requireNonNull(oe.getDefaultMessage()), oe.getArguments(), Locale.getDefault());
+            })
             .collect(Collectors.toList());
         body.put("errors", errors);
 

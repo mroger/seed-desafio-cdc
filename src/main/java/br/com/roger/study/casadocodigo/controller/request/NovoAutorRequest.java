@@ -1,5 +1,6 @@
 package br.com.roger.study.casadocodigo.controller.request;
 
+import br.com.roger.study.casadocodigo.controller.validator.Unique;
 import br.com.roger.study.casadocodigo.model.Autor;
 import org.hibernate.validator.constraints.Length;
 
@@ -13,9 +14,12 @@ public class NovoAutorRequest {
 
     @NotEmpty(message = "cdc.request.nome.obrigatorio")
     private String nome;
+
     @NotEmpty(message = "cdc.request.email.obrigatorio")
     @Email(message = "cdc.request.email.invalido")
+    @Unique(clazz = Autor.class, field = "email")
     private String email;
+
     @NotEmpty(message = "cdc.request.descricao.obrigatorio")
     @Length(max = 400, message = "cdc.request.descricao.maximo")
     private String descricao;

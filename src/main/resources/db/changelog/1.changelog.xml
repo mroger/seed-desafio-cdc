@@ -40,4 +40,12 @@
     <changeSet id="202103310100" author="marcos">
         <createSequence sequenceName="categoria_sequence" minValue="1" startValue="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="202104010024" author="marcos">
+        <createIndex tableName="autor" indexName="autor_email_idx01">
+            <column name="email"/>
+        </createIndex>
+        <createIndex tableName="categoria" indexName="categoria_nome_idx01">
+            <column name="nome"/>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>
