@@ -1,5 +1,7 @@
 package br.com.roger.study.casadocodigo.controller.validator;
 
+import org.springframework.util.Assert;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintValidator;
@@ -27,6 +29,9 @@ public class UniqueStringFieldValidator implements ConstraintValidator<Unique, S
             .setParameter(fieldName, fieldValue)
             .getResultList();
 
-        return resultList.size() == 0;
+        final String stateMessage = String.format("Foi encontrado mais de um %s com o mesmo %s no banco", clazz.getSimpleName(), fieldName);
+        Assert.state(resultList.size() <= 1, stateMessage);
+
+        return resultList.isEmpty();
     }
 }
