@@ -9,14 +9,12 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy= UniqueStringFieldValidator.class)
-public @interface Unique {
+@Constraint(validatedBy= ExistsIdFieldValidator.class)
+public @interface ExistsId {
 
-    String message() default "cdc.atributo.duplicado";
+    String message() default "cdc.relacionamento.naoencontrado";
 
     Class<?> clazz();
-
-    String field();
 
     Class<?>[] groups() default {};
 

@@ -48,4 +48,41 @@
             <column name="nome"/>
         </createIndex>
     </changeSet>
+    <changeSet id="2021040021532" author="marcos">
+        <createTable tableName="livro">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="titulo" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumo" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sumario" type="varchar">
+                <constraints nullable="true"/>
+            </column>
+            <column name="preco" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero_paginas" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isbn" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_publicacao" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_categoria" type="bigint">
+                <constraints foreignKeyName="fk_categoria_livro" references="categoria(id)" nullable="false"/>
+            </column>
+            <column name="id_autor" type="bigint">
+                <constraints foreignKeyName="fk_autor_livro" references="autor(id)" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2021040021648" author="marcos">
+        <createSequence sequenceName="livro_sequence" minValue="1" startValue="1" incrementBy="1" />
+    </changeSet>
 </databaseChangeLog>
