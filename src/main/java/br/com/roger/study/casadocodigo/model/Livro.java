@@ -75,6 +75,10 @@ public class Livro {
         return id;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
     public static class LivroBuilder {
 
         private String titulo;
