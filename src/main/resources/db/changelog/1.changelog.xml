@@ -85,4 +85,29 @@
     <changeSet id="2021040021648" author="marcos">
         <createSequence sequenceName="livro_sequence" minValue="1" startValue="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="2021040030" author="marcos">
+        <createTable tableName="pais">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="pais_sequence" minValue="1" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="2021040055" author="marcos">
+        <createTable tableName="estado">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_pais" type="bigint">
+                <constraints foreignKeyName="fk_pais_estado" references="pais(id)" nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="estado_sequence" minValue="1" startValue="1" incrementBy="1" />
+    </changeSet>
 </databaseChangeLog>
