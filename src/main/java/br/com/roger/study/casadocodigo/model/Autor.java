@@ -56,6 +56,22 @@ public class Autor {
         return this.id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Instant getRegistradoEm() {
+        return registradoEm;
+    }
+
     @Override
     public String toString() {
         return "Autor{" +
