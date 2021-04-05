@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class UniqueStringFieldValidator implements ConstraintValidator<Unique, String> {
+    public class UniqueStringFieldValidator implements ConstraintValidator<Unique, String> {
 
     @PersistenceContext
     private EntityManager em;

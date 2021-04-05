@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class NovoLivroRequest {
 
     @NotBlank(message = "cdc.livro.titulo.obrigatorio")
-    @Unique(clazz = Livro.class, field = "titulo")
+    @Unique(clazz = Livro.class, field = "titulo") //O atributo message poderia se passado aqui e sobrescrito o default
     private String titulo;
 
     @NotBlank(message = "cdc.livro.resumo.obrigatorio")

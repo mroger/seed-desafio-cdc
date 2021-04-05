@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 public class Pais {
@@ -20,6 +22,9 @@ public class Pais {
 
     @NotBlank
     private String nome;
+
+    @OneToMany(mappedBy = "pais")
+    private List<Estado> estados;
 
     @Deprecated
     public Pais() { }
@@ -35,5 +40,9 @@ public class Pais {
 
     public String getNome() {
         return nome;
+    }
+
+    public List<Estado> getEstados() {
+        return estados;
     }
 }
