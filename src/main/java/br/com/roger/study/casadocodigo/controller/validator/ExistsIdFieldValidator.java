@@ -19,6 +19,9 @@ public class ExistsIdFieldValidator implements ConstraintValidator<ExistsId, Lon
 
     @Override
     public boolean isValid(Long fieldValue, ConstraintValidatorContext context) {
+        if (fieldValue == null) {
+            return true;
+        }
         final String queryStr = String.format("select e from %s e where e.id = :id", clazz.getSimpleName());
 
         final List<?> resultList = em.createQuery(queryStr, clazz)
