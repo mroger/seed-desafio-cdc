@@ -9,16 +9,12 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = EstadoPaisValidator.class)
-public @interface EstadoPaisValid {
+@Constraint(validatedBy = PagamentoEstadoPaisValidator.class)
+public @interface PagamentoEstadoPaisValid {
 
     String message() default "cdc.campo.obrigatorio";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
-    String campoEstado();
-
-    String campoPais();
 }

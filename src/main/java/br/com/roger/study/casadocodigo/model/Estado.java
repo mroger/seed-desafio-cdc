@@ -22,6 +22,7 @@ public class Estado {
     @NotBlank
     private String nome;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pais")
     private Pais pais;

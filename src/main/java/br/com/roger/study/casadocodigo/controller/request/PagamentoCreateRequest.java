@@ -1,7 +1,7 @@
 package br.com.roger.study.casadocodigo.controller.request;
 
 import br.com.roger.study.casadocodigo.controller.validator.CPFCNPJ;
-import br.com.roger.study.casadocodigo.controller.validator.EstadoPaisValid;
+import br.com.roger.study.casadocodigo.controller.validator.PagamentoEstadoPaisValid;
 import br.com.roger.study.casadocodigo.controller.validator.ExistsId;
 import br.com.roger.study.casadocodigo.model.Pais;
 
@@ -9,7 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@EstadoPaisValid(campoEstado = "idEstado", campoPais = "idPais")
+@PagamentoEstadoPaisValid
 public class PagamentoCreateRequest {
 
     @NotEmpty(message = "cdc.pagamento.email.obrigatorio")
