@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -14,6 +15,8 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_generator")
     @SequenceGenerator(name="categoria_generator", sequenceName = "categoria_sequence")
     private Long id;
+
+    @NotBlank
     private String nome;
 
     @Deprecated

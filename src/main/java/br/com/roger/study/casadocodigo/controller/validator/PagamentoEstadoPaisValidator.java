@@ -1,6 +1,6 @@
 package br.com.roger.study.casadocodigo.controller.validator;
 
-import br.com.roger.study.casadocodigo.controller.request.PagamentoCreateRequest;
+import br.com.roger.study.casadocodigo.controller.request.CompraCreateRequest;
 import br.com.roger.study.casadocodigo.model.Estado;
 import br.com.roger.study.casadocodigo.model.Pais;
 
@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PagamentoEstadoPaisValidator implements ConstraintValidator<PagamentoEstadoPaisValid, PagamentoCreateRequest> {
+public class PagamentoEstadoPaisValidator implements ConstraintValidator<PagamentoEstadoPaisValid, CompraCreateRequest> {
 
     @PersistenceContext
     private EntityManager em;
@@ -20,7 +20,7 @@ public class PagamentoEstadoPaisValidator implements ConstraintValidator<Pagamen
     }
 
     @Override
-    public boolean isValid(PagamentoCreateRequest request, ConstraintValidatorContext context) {
+    public boolean isValid(CompraCreateRequest request, ConstraintValidatorContext context) {
         if (request == null) {
             return true;
         }

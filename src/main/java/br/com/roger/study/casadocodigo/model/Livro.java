@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -28,26 +29,34 @@ public class Livro {
     @SequenceGenerator(name="livro_generator", sequenceName = "livro_sequence")
     private Long id;
 
+    @NotBlank
     private String titulo;
 
+    @NotBlank
     private String resumo;
 
     private String sumario;
 
+    @NotNull
     private BigDecimal preco;
 
+    @NotNull
     @Column(name = "numero_paginas")
     private Integer numeroPaginas;
 
+    @NotBlank
     private String isbn;
 
+    @NotNull
     @Column(name = "data_publicacao")
     private LocalDate dataPublicacao;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_autor")
     private Autor autor;
@@ -56,8 +65,8 @@ public class Livro {
     public Livro() {
     }
 
-    private Livro(@NotEmpty String titulo, @NotEmpty String resumo, String sumario, @NotNull BigDecimal preco,
-            @NotNull @Min(value = 100) Integer numeroPaginas, @NotEmpty @Unique(clazz = Livro.class, field = "isbn") String isbn,
+    private Livro(@NotBlank String titulo, @NotBlank String resumo, String sumario, @NotNull BigDecimal preco,
+            @NotNull @Min(value = 100) Integer numeroPaginas, @NotBlank @Unique(clazz = Livro.class, field = "isbn") String isbn,
             @NotNull @Future LocalDate dataPublicacao, @NotNull @ExistsId(clazz = Categoria.class) Categoria categoria,
             @NotNull @ExistsId(clazz = Autor.class) Autor autor) {
         this.titulo = titulo;

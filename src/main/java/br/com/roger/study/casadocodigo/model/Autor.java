@@ -9,7 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 /**
@@ -22,19 +23,20 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "autor_generator")
     @SequenceGenerator(name="autor_generator", sequenceName = "autor_sequence")
     private Long id;
-    @NotEmpty
+    @NotBlank
     private String nome;
-    @NotEmpty @Email
+    @NotBlank @Email
     private String email;
-    @NotEmpty @Length(max = 400)
+    @NotBlank @Length(max = 400)
     private String descricao;
+    @NotNull
     private Instant registradoEm;
 
     @Deprecated
     public Autor() { }
 
-    public Autor(@NotEmpty final String nome, @NotEmpty @Email final String email,
-            @NotEmpty @Length(max = 400) final String descricao) {
+    public Autor(@NotBlank final String nome, @NotBlank @Email final String email,
+            @NotBlank @Length(max = 400) final String descricao) {
         validateInput(nome, email, descricao);
 
         this.nome = nome;

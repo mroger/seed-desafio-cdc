@@ -110,4 +110,69 @@
         </createTable>
         <createSequence sequenceName="estado_sequence" minValue="1" startValue="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="202104062346" author="marcos">
+        <createTable tableName="pedido">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="pedido_sequence" minValue="1" startValue="1" incrementBy="1" />
+        <createTable tableName="compra">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sobrenome" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="documento" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="endereco" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="complemento" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cidade" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telefone" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cep" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_pais" type="bigint">
+                <constraints foreignKeyName="fk_pais_compra" references="pais(id)" nullable="false"/>
+            </column>
+            <column name="id_estado" type="bigint">
+                <constraints foreignKeyName="fk_estado_compra" references="estado(id)" nullable="true"/>
+            </column>
+            <column name="id_pedido" type="bigint">
+                <constraints foreignKeyName="fk_pedido_compra" references="pedido(id)" nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="compra_sequence" minValue="1" startValue="1" incrementBy="1" />
+        <createTable tableName="item_pedido">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_livro" type="bigint">
+                <constraints foreignKeyName="fk_livro_item_pedido" references="livro(id)" nullable="false"/>
+            </column>
+            <column name="quantidade" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_pedido" type="bigint">
+                <constraints foreignKeyName="fk_pedido_item_pedido" references="pedido(id)" nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="item_pedido_sequence" minValue="1" startValue="1" incrementBy="1" />
+    </changeSet>
 </databaseChangeLog>
