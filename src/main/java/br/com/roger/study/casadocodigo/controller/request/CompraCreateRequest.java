@@ -51,13 +51,10 @@ public class CompraCreateRequest {
         @NotNull Pais pais = em.find(Pais.class, idPais);
         Assert.state(pais != null, "Não foi encontrado país para associar à Compra: " + idPais);
 
-        Estado estado = em.find(Estado.class, idEstado);
-        Assert.state((idEstado != null && estado != null), "Não foi encontrada estado para associar à Compra: " + idEstado);
-
         @NotNull final Function<Compra, Pedido> fabricaPedidos = this.pedido.toModel(em);
         Assert.state(pedido != null, "Não foi possível criar a conta");
 
-        return new Compra.CompraBuilder()
+        Compra.CompraBuilder builder = new Compra.CompraBuilder()
             .withEmail(email)
             .withNome(nome)
             .withSobrenome(sobrenome)
@@ -68,9 +65,20 @@ public class CompraCreateRequest {
             .withTelefone(telefone)
             .withCep(cep)
             .withPais(pais)
-            .withEstado(estado)
-            .withPedido(fabricaPedidos)
-            .build();
+            .withPedido(fabricaPedidos);
+
+        if (idEstado != null) {
+            Assert.isTrue(pais.possuiEstados(), "O Estado não pertence ao País");
+
+            Estado estado = em.find(Estado.class, idEstado);
+            Assert.state((idEstado != null && estado != null), "Não foi encontrado estado para associar à Compra: " + idEstado);
+            //Ficaria melhor dentro do builder, mas aí vai depender da ordem da montagem: pais tem que ser atribuido antes do estado
+            Assert.isTrue(estado.pertenceA(pais), "O Estado não pertence ao País");
+
+            builder.withEstado(estado);
+        }
+
+        return builder.build();
     }
 
     public String getEmail() {

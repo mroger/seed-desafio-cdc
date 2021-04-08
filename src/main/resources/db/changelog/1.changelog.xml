@@ -175,4 +175,11 @@
         </createTable>
         <createSequence sequenceName="item_pedido_sequence" minValue="1" startValue="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="202104072312" author="marcos">
+        <addColumn tableName="item_pedido">
+            <column name="preco_na_compra" type="decimal">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

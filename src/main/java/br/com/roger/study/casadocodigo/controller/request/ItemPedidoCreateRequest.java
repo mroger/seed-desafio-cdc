@@ -28,7 +28,7 @@ public class ItemPedidoCreateRequest {
     }
 
     public ItemPedido toModel(EntityManager em) {
-        final Livro livro = em.find(Livro.class, idLivro);
+        @NotNull final Livro livro = em.find(Livro.class, idLivro);
         Assert.state(livro != null, "O livro colocado no carrinho não está cadastrado: " + idLivro);
 
         return new ItemPedido(livro, quantidade);

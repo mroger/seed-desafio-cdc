@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.function.Function;
 
+//TODO Modelar como aggregate root
+
 @Entity
 public class Compra {
 
@@ -66,7 +68,7 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
+    private Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
                   String cidade, String telefone, String cep, Pais pais, Estado estado, Function<Compra, Pedido> fabricaPedidos) {
 
         this.email = email;
@@ -149,6 +151,7 @@ public class Compra {
         }
 
         public CompraBuilder withEstado(Estado estado) {
+
             this.estado = estado;
             return this;
         }

@@ -1,5 +1,6 @@
 package br.com.roger.study.casadocodigo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+
+// Value Object do DDD
 
 @Entity
 public class ItemPedido {
@@ -31,6 +35,11 @@ public class ItemPedido {
     @JoinColumn(name = "id_pedido")
     private Pedido pedido;
 
+    @NotNull
+    @Positive
+    @Column(name = "preco_na_compra")
+    private BigDecimal precoNaCompra;
+
     @Deprecated
     public ItemPedido() {
     }
@@ -38,6 +47,8 @@ public class ItemPedido {
     public ItemPedido(Livro livro, Integer quantidade) {
         this.livro = livro;
         this.quantidade = quantidade;
+        //Nos protegendo caso o preco no livro mude
+        this.precoNaCompra = livro.getPreco();
     }
 
     public void setPedido(Pedido pedido) {

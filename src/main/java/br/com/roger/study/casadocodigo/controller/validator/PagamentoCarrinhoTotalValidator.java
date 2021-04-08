@@ -24,7 +24,7 @@ public class PagamentoCarrinhoTotalValidator implements ConstraintValidator<Paga
         if (request == null) {
             return true;
         }
-        if (request.getTotal() == null || request.getItens() == null) {
+        if (request.getTotal() == null || request.getItens() == null || request.getItens().isEmpty()) {
             return true;
         }
         final BigDecimal totalSum = request.getItens().stream()

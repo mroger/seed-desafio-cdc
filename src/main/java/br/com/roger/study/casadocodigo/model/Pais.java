@@ -45,4 +45,8 @@ public class Pais {
     public List<Estado> getEstados() {
         return estados;
     }
+
+    public boolean possuiEstados() {
+        return estados != null && !estados.isEmpty();
+    }
 }

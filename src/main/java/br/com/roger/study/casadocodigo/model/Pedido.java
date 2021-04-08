@@ -12,8 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.List;
+
+//TODO Modelar como aggregate root de ItemPedido
 
 @Entity
 public class Pedido {
@@ -34,7 +39,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(List<ItemPedido> itens, Compra compra) {
+    public Pedido(@Size(min = 1) List<ItemPedido> itens, @NotNull @Valid Compra compra) {
         Assert.notEmpty(itens, "Um pedido precisa ter itens");
 
         this.itens = itens;

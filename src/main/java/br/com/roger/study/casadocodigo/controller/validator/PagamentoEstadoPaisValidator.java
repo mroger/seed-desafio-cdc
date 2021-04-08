@@ -34,17 +34,26 @@ public class PagamentoEstadoPaisValidator implements ConstraintValidator<Pagamen
             return true;
         }
 
+        if (request.getIdEstado() != null) {
+            final Estado estado = em.find(Estado.class, request.getIdEstado());
+            if (estado == null) {
+                changeMessageTemplate(context, "cdc.pagamento.idEstado.naocadastrado");
+                return false;
+            }
+        }
+
         if (!pais.getEstados().isEmpty()) {
             if (request.getIdEstado() == null) {
                 changeMessageTemplate(context, "cdc.pagamento.idEstado.obrigatorio");
                 return false;
             }
             final Estado estado = em.find(Estado.class, request.getIdEstado());
-            if (estado == null) {
-                changeMessageTemplate(context, "cdc.pagamento.idEstado.naocadastrado");
+            if (!estado.getPais().getId().equals(request.getIdPais())) {
+                changeMessageTemplate(context, "cdc.pagamento.idEstado.naoassociadopais");
                 return false;
             }
-            if (!estado.getPais().getId().equals(request.getIdPais())) {
+        } else {
+            if (request.getIdEstado() != null) {
                 changeMessageTemplate(context, "cdc.pagamento.idEstado.naoassociadopais");
                 return false;
             }
