@@ -182,4 +182,20 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="202104081832" author="marcos">
+        <createTable tableName="cupom">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="codigo" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="desconto" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="validade" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
