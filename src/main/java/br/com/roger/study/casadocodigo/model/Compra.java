@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.function.Function;
 
 //TODO Modelar como aggregate root
@@ -60,6 +61,12 @@ public class Compra {
     @JoinColumn(name = "id_estado")
     private Estado estado;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cupom")
+    private Cupom cupom;
+
+    private BigDecimal descontoAplicado;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pedido")
     private Pedido pedido;
@@ -69,7 +76,7 @@ public class Compra {
     }
 
     private Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
-                  String cidade, String telefone, String cep, Pais pais, Estado estado, Function<Compra, Pedido> fabricaPedidos) {
+                  String cidade, String telefone, String cep, Pais pais, Estado estado, Cupom cupom, Function<Compra, Pedido> fabricaPedidos) {
 
         this.email = email;
         this.nome = nome;
@@ -82,6 +89,8 @@ public class Compra {
         this.cep = cep;
         this.pais = pais;
         this.estado = estado;
+        this.cupom = cupom;
+        this.descontoAplicado = cupom.getDesconto();
         this.pedido = fabricaPedidos.apply(this);
     }
 
@@ -98,6 +107,7 @@ public class Compra {
         private String cep;
         private Pais pais;
         private Estado estado;
+        private Cupom cupom;
         private Function<Compra, Pedido> fabricaPedidos;
 
         public CompraBuilder withEmail(String email) {
@@ -151,7 +161,6 @@ public class Compra {
         }
 
         public CompraBuilder withEstado(Estado estado) {
-
             this.estado = estado;
             return this;
         }
@@ -161,9 +170,14 @@ public class Compra {
             return this;
         }
 
+        public CompraBuilder withCupom(Cupom cupom) {
+            this.cupom = cupom;
+            return this;
+        }
+
         public Compra build() {
             return new Compra(email, nome, sobrenome, documento, endereco, complemento, cidade, telefone, cep,
-                pais, estado, fabricaPedidos);
+                pais, estado, cupom, fabricaPedidos);
         }
     }
 

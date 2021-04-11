@@ -198,4 +198,14 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="202104100012" author="marcos">
+        <addColumn tableName="compra">
+            <column name="id_cupom" type="bigint">
+                <constraints foreignKeyName="fk_cupom_compra" references="cupom(id)" nullable="true"/>
+            </column>
+            <column name="desconto_aplicado" type="decimal">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

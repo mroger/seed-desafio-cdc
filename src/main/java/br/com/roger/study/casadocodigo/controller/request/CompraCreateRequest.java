@@ -1,9 +1,12 @@
 package br.com.roger.study.casadocodigo.controller.request;
 
 import br.com.roger.study.casadocodigo.controller.validator.CPFCNPJ;
+import br.com.roger.study.casadocodigo.controller.validator.CupomValido;
+import br.com.roger.study.casadocodigo.controller.validator.Exists;
 import br.com.roger.study.casadocodigo.controller.validator.ExistsId;
 import br.com.roger.study.casadocodigo.controller.validator.PagamentoEstadoPaisValid;
 import br.com.roger.study.casadocodigo.model.Compra;
+import br.com.roger.study.casadocodigo.model.Cupom;
 import br.com.roger.study.casadocodigo.model.Estado;
 import br.com.roger.study.casadocodigo.model.Pais;
 import br.com.roger.study.casadocodigo.model.Pedido;
@@ -14,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.function.Function;
 
 @PagamentoEstadoPaisValid
@@ -43,6 +47,9 @@ public class CompraCreateRequest {
     private String telefone;
     @NotBlank(message = "cdc.pagamento.cep.obrigatorio")
     private String cep;
+    @Exists(clazz = Cupom.class, field = "codigo")
+    @CupomValido
+    private String codigoCupom;
     @NotNull(message = "cdc.pagamento.carrinho.obrigatorio")
     @Valid
     private PedidoCreateRequest pedido;
@@ -76,6 +83,16 @@ public class CompraCreateRequest {
             Assert.isTrue(estado.pertenceA(pais), "O Estado não pertence ao País");
 
             builder.withEstado(estado);
+        }
+
+        if (codigoCupom != null) {
+            Cupom cupom = em.createQuery("from Cupom c where c.codigo = :codigo", Cupom.class)
+                .setParameter("codigo", codigoCupom)
+                .getSingleResult();
+            Assert.notNull(cupom, "O Cupom referente ao codigo não existe: " + codigoCupom);
+            Assert.isTrue(cupom.getValidade().equals(LocalDate.now()) ||
+                cupom.getValidade().isAfter(LocalDate.now()), "cdc.cupom.invalido");
+            builder.withCupom(cupom);
         }
 
         return builder.build();
@@ -127,5 +144,9 @@ public class CompraCreateRequest {
 
     public PedidoCreateRequest getPedido() {
         return pedido;
+    }
+
+    public String getCodigoCupom() {
+        return codigoCupom;
     }
 }
