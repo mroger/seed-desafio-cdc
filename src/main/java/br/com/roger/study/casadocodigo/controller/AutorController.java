@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 /**
- * Carga intrinseca: 3
+ * Carga intrinseca: 2
  */
 @RestController
 @RequestMapping(value = { "/autores" })

@@ -21,6 +21,9 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Carga: 2
+ */
 @Entity
 public class Livro {
 

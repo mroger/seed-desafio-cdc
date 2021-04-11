@@ -20,6 +20,9 @@ import java.util.List;
 
 //TODO Modelar como aggregate root de ItemPedido
 
+/**
+ * Carga: 5
+ */
 @Entity
 public class Pedido {
 

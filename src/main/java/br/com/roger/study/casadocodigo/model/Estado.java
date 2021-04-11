@@ -11,6 +11,9 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Carga: 1
+ */
 @Entity
 public class Estado {
 

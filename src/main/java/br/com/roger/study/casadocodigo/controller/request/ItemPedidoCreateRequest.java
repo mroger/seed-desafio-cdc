@@ -9,6 +9,10 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Carga: 2
+ */
+
 public class ItemPedidoCreateRequest {
 
     @NotNull(message = "cdc.pagamento.carrinho.itens.livro.obrigatorio")
@@ -27,7 +31,9 @@ public class ItemPedidoCreateRequest {
         return quantidade;
     }
 
+    //1
     public ItemPedido toModel(EntityManager em) {
+        //1
         @NotNull final Livro livro = em.find(Livro.class, idLivro);
         Assert.state(livro != null, "O livro colocado no carrinho não está cadastrado: " + idLivro);
 

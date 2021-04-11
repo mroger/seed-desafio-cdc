@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 /**
- * Carga intrinseca: 1
+ * Carga intrinseca: 0
  */
 @Entity
 public class Autor {
@@ -49,9 +49,7 @@ public class Autor {
         Assert.hasLength(nome, "O nome do autor é obrigatório");
         Assert.hasLength(email, "O email do autor é obrigatório");
         Assert.hasLength(descricao, "A descricao do autor é obrigatória");
-        if (descricao.length() > 400) {
-            throw new IllegalArgumentException("A descrição do Autor deve ter no máximo 400 caracteres");
-        }
+        Assert.isTrue(descricao.length() > 400, "A descrição do Autor deve ter no máximo 400 caracteres");
     }
 
     public Long getId() {

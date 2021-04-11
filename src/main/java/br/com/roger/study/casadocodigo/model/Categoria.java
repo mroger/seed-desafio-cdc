@@ -8,6 +8,9 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+/**
+ * Carga: 0
+ */
 @Entity
 public class Categoria {
 

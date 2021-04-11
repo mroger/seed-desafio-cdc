@@ -10,6 +10,10 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Carga: 2
+ */
+
 public class EstadoCreateRequest {
 
     @NotBlank(message = "cdc.estado.nome.obrigatorio")
@@ -20,7 +24,9 @@ public class EstadoCreateRequest {
     @ExistsId(clazz = Pais.class)
     private Long idPais;
 
+    //1
     public Estado toModel(EntityManager em) {
+        //1
         Pais pais = em.find(Pais.class, idPais);
         Assert.notNull(pais, "O Pais não foi encontrado no banco");
 

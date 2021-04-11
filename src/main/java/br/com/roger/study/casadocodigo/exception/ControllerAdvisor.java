@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Carga intrinseca: 4
+ * Carga intrinseca: 1
  */
 @ControllerAdvice(annotations = RestController.class)
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {

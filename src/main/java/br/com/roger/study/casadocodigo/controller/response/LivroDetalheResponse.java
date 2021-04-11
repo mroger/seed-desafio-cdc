@@ -5,6 +5,10 @@ import br.com.roger.study.casadocodigo.model.Livro;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Carga: 2
+ */
+
 public class LivroDetalheResponse {
 
     private final String titulo;
@@ -21,8 +25,10 @@ public class LivroDetalheResponse {
 
     private final LocalDate dataPublicacao;
 
+    //1
     private final AutorResponse autor;
 
+    //1
     public LivroDetalheResponse(final Livro livro) {
         this.titulo = livro.getTitulo();
         this.resumo = livro.getResumo();

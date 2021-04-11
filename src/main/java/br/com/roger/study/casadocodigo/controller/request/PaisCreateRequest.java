@@ -5,6 +5,10 @@ import br.com.roger.study.casadocodigo.model.Pais;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Carga: 1
+ */
+
 public class PaisCreateRequest {
 
     @NotBlank(message = "cdc.pais.nome.obrigatorio")

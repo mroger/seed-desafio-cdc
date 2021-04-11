@@ -17,6 +17,10 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Carga: 4
+ */
+
 public class NovoLivroRequest {
 
     @NotBlank(message = "cdc.livro.titulo.obrigatorio")
@@ -72,13 +76,17 @@ public class NovoLivroRequest {
         this.idAutor = idAutor;
     }
 
+    //1
     public Livro toModel(EntityManager em) {
+        //1
         @NotNull Autor autor = em.find(Autor.class, idAutor);
         Assert.state(autor != null, "Não foi encontrado autor para associar ao Livro: " + idAutor);
 
+        //1
         @NotNull Categoria categoria = em.find(Categoria.class, idCategoria);
         Assert.state(categoria != null, "Não foi encontrada categoria para associar ao Livro: " + idCategoria);
 
+        //1
         return new Livro.LivroBuilder()
             .withTitulo(titulo)
             .withResumo(resumo)

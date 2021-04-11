@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Carga intrinseca: 5
  */
 @RestController
 @RequestMapping(value = { "/livros" })

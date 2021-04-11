@@ -5,6 +5,10 @@ import br.com.roger.study.casadocodigo.model.Categoria;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Carga: 1
+ */
+
 public class NovaCategoriaRequest {
 
     @Unique(clazz = Categoria.class, field = "nome")

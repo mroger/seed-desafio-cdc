@@ -15,6 +15,10 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 
+/**
+ * Carga intrinseca: 2
+ */
+
 @RestController
 @RequestMapping("/estados")
 public class EstadoController {

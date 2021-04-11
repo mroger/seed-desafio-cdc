@@ -17,6 +17,9 @@ import java.util.function.Function;
 
 //TODO Modelar como aggregate root
 
+/**
+ * Carga: 4
+ */
 @Entity
 public class Compra {
 
@@ -55,20 +58,24 @@ public class Compra {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pais")
+    //1
     private Pais pais;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estado")
+    //1
     private Estado estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cupom")
+    //1
     private Cupom cupom;
 
     private BigDecimal descontoAplicado;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pedido")
+    //1
     private Pedido pedido;
 
     @Deprecated

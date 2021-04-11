@@ -8,13 +8,17 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-    public class UniqueStringFieldValidator implements ConstraintValidator<Unique, String> {
+/**
+ * Carga: 1
+ */
+public class UniqueStringFieldValidator implements ConstraintValidator<Unique, String> {
 
     @PersistenceContext
     private EntityManager em;
     private Class<?> clazz;
     private String fieldName;
 
+    //1
     @Override
     public void initialize(Unique annotation) {
         this.clazz = annotation.clazz();

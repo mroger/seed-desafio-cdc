@@ -20,6 +20,10 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.function.Function;
 
+/**
+ * Carga intrinseca: 8
+ */
+
 @PagamentoEstadoPaisValid
 public class CompraCreateRequest {
 
@@ -52,15 +56,21 @@ public class CompraCreateRequest {
     private String codigoCupom;
     @NotNull(message = "cdc.pagamento.carrinho.obrigatorio")
     @Valid
+    //1
     private PedidoCreateRequest pedido;
 
+    //1
     public Compra toModel(EntityManager em) {
+        //1
         @NotNull Pais pais = em.find(Pais.class, idPais);
         Assert.state(pais != null, "Não foi encontrado país para associar à Compra: " + idPais);
 
+        //1
+        //1
         @NotNull final Function<Compra, Pedido> fabricaPedidos = this.pedido.toModel(em);
         Assert.state(pedido != null, "Não foi possível criar a conta");
 
+        //1
         Compra.CompraBuilder builder = new Compra.CompraBuilder()
             .withEmail(email)
             .withNome(nome)
@@ -77,6 +87,7 @@ public class CompraCreateRequest {
         if (idEstado != null) {
             Assert.isTrue(pais.possuiEstados(), "O Estado não pertence ao País");
 
+            //1
             Estado estado = em.find(Estado.class, idEstado);
             Assert.state((idEstado != null && estado != null), "Não foi encontrado estado para associar à Compra: " + idEstado);
             //Ficaria melhor dentro do builder, mas aí vai depender da ordem da montagem: pais tem que ser atribuido antes do estado
@@ -86,6 +97,7 @@ public class CompraCreateRequest {
         }
 
         if (codigoCupom != null) {
+            //1
             Cupom cupom = em.createQuery("from Cupom c where c.codigo = :codigo", Cupom.class)
                 .setParameter("codigo", codigoCupom)
                 .getSingleResult();

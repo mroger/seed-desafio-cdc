@@ -9,6 +9,10 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Carga: 1
+ */
+
 public class CupomDescontoCreateRequest {
 
     @NotNull(message = "cdc.cupom.codigo.obrigatorio")
@@ -23,6 +27,7 @@ public class CupomDescontoCreateRequest {
     @Future(message = "cdc.cupom.validade.futuro")
     private LocalDate validade;
 
+    //1
     public Cupom toModel() {
         return new Cupom(codigo, desconto, validade);
     }

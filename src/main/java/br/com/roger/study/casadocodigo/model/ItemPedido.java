@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 
 // Value Object do DDD
 
+/**
+ * Carga: 2
+ */
 @Entity
 public class ItemPedido {
 

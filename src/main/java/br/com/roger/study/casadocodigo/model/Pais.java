@@ -12,6 +12,9 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
+/**
+ * Carga: 1
+ */
 @Entity
 public class Pais {
 

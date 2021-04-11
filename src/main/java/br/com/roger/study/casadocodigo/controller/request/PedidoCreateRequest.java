@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Carga: 6
+ */
+
 @PagamentoCarrinhoTotalValid
 public class PedidoCreateRequest {
 
@@ -25,6 +29,7 @@ public class PedidoCreateRequest {
 
     @NotEmpty(message = "cdc.pagamento.carrinho.itens.obrigatorio")
     @Valid
+    //1
     private List<ItemPedidoCreateRequest> itens;
 
     public BigDecimal getTotal() {
@@ -35,12 +40,17 @@ public class PedidoCreateRequest {
         return itens;
     }
 
+    //1
+    //1
     public Function<Compra, Pedido> toModel(EntityManager em) {
 
+        //1
+        //1
         final List<ItemPedido> itensPedido = itens.stream()
             .map(item -> item.toModel(em))
             .collect(Collectors.toList());
 
+        //1
         return (compra) -> {
             final Pedido pedido = new Pedido(itensPedido, compra);
             Assert.isTrue(pedido.totalEquals(total), "O total não coincide com o que está no carrinho");
