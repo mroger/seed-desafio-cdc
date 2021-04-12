@@ -198,13 +198,26 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="202104100012" author="marcos">
-        <addColumn tableName="compra">
-            <column name="id_cupom" type="bigint">
-                <constraints foreignKeyName="fk_cupom_compra" references="cupom(id)" nullable="true"/>
+    <changeSet id="202104120052" author="marcos">
+        <createSequence sequenceName="cupom_sequence" minValue="1" startValue="1" incrementBy="1" />
+        <createTable tableName="cupom_aplicado">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="desconto_aplicado" type="decimal">
-                <constraints nullable="true"/>
+            <column name="id_cupom" type="bigint">
+                <constraints foreignKeyName="fk_cupom_compra" references="cupom(id)" nullable="false"/>
+            </column>
+            <column name="desconto" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="validade" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="cupom_aplicado_sequence" minValue="1" startValue="1" incrementBy="1" />
+        <addColumn tableName="compra">
+            <column name="id_cupom_aplicado" type="bigint">
+                <constraints foreignKeyName="fk_cupom_aplicado_compra" references="cupom_aplicado(id)" nullable="true"/>
             </column>
         </addColumn>
     </changeSet>

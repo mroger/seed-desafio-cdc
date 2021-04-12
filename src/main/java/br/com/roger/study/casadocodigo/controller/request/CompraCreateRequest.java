@@ -7,6 +7,7 @@ import br.com.roger.study.casadocodigo.controller.validator.ExistsId;
 import br.com.roger.study.casadocodigo.controller.validator.PagamentoEstadoPaisValid;
 import br.com.roger.study.casadocodigo.model.Compra;
 import br.com.roger.study.casadocodigo.model.Cupom;
+import br.com.roger.study.casadocodigo.model.CupomAplicado;
 import br.com.roger.study.casadocodigo.model.Estado;
 import br.com.roger.study.casadocodigo.model.Pais;
 import br.com.roger.study.casadocodigo.model.Pedido;
@@ -17,7 +18,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.function.Function;
 
 /**
@@ -97,14 +97,14 @@ public class CompraCreateRequest {
         }
 
         if (codigoCupom != null) {
+            Assert.hasText(codigoCupom, "Deve ser fornecido um código de Cupom válido");
             //1
             Cupom cupom = em.createQuery("from Cupom c where c.codigo = :codigo", Cupom.class)
                 .setParameter("codigo", codigoCupom)
                 .getSingleResult();
             Assert.notNull(cupom, "O Cupom referente ao codigo não existe: " + codigoCupom);
-            Assert.isTrue(cupom.getValidade().equals(LocalDate.now()) ||
-                cupom.getValidade().isAfter(LocalDate.now()), "cdc.cupom.invalido");
-            builder.withCupom(cupom);
+            Assert.isTrue(cupom.valido(), "cdc.cupom.invalido");
+            builder.withCupomAplicado(new CupomAplicado(cupom));
         }
 
         return builder.build();
