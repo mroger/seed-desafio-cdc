@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.function.Function;
 
 //TODO Modelar como aggregate root
@@ -96,6 +98,20 @@ public class Compra {
         this.estado = estado;
         this.cupomAplicado = cupomAplicado;
         this.pedido = fabricaPedidos.apply(this);
+    }
+
+    public BigDecimal getValorOriginal() {
+        return pedido.valorTotalItens();
+    }
+
+    public BigDecimal getDescontoAplicado() {
+        return cupomAplicado != null ? cupomAplicado.getDesconto() : BigDecimal.ZERO;
+    }
+
+    public BigDecimal getValorFinal() {
+        return cupomAplicado != null ?
+            getValorOriginal().subtract(getValorOriginal().multiply(getDescontoAplicado().divide(BigDecimal.valueOf(100), 3, RoundingMode.HALF_DOWN))):
+            null;
     }
 
     public static class CompraBuilder {
@@ -185,6 +201,10 @@ public class Compra {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -230,6 +250,14 @@ public class Compra {
     }
 
     public Pedido getCompra() {
+        return pedido;
+    }
+
+    public CupomAplicado getCupomAplicado() {
+        return cupomAplicado;
+    }
+
+    public Pedido getPedido() {
         return pedido;
     }
 }

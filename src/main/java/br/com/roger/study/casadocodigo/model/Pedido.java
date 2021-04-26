@@ -54,9 +54,17 @@ public class Pedido {
         return valorTotalItens().equals(total);
     }
 
-    private BigDecimal valorTotalItens() {
+    public BigDecimal valorTotalItens() {
         return itens.stream()
             .map(ItemPedido::valorTotal)
             .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
     }
 }

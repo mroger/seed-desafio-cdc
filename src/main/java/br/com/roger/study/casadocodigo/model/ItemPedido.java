@@ -61,4 +61,20 @@ public class ItemPedido {
     public BigDecimal valorTotal() {
         return livro.getPreco().multiply(BigDecimal.valueOf(quantidade));
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public BigDecimal getPrecoNaCompra() {
+        return precoNaCompra;
+    }
 }

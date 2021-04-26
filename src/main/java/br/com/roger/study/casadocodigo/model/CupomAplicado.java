@@ -49,4 +49,8 @@ public class CupomAplicado {
         this.validade = cupom.getValidade();
         cupom.getCupomAplicados().add(this);
     }
+
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
 }
