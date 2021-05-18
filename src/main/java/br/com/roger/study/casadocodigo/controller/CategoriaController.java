@@ -1,6 +1,6 @@
 package br.com.roger.study.casadocodigo.controller;
 
-import br.com.roger.study.casadocodigo.controller.request.NovaCategoriaRequest;
+import br.com.roger.study.casadocodigo.controller.request.CategoriaCreateRequest;
 import br.com.roger.study.casadocodigo.model.Categoria;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class CategoriaController {
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody @Valid final NovaCategoriaRequest request) {
+    public ResponseEntity<?> create(@RequestBody @Valid final CategoriaCreateRequest request) {
 
         Categoria novaCategoria = request.toModel();
 

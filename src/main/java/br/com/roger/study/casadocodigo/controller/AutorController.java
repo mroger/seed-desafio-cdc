@@ -1,6 +1,6 @@
 package br.com.roger.study.casadocodigo.controller;
 
-import br.com.roger.study.casadocodigo.controller.request.NovoAutorRequest;
+import br.com.roger.study.casadocodigo.controller.request.AutorCreateRequest;
 import br.com.roger.study.casadocodigo.model.Autor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class AutorController {
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody @Valid final NovoAutorRequest request) {
+    public ResponseEntity<?> create(@RequestBody @Valid final AutorCreateRequest request) {
 
         Autor novoAutor = request.toModel();
 

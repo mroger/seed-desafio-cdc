@@ -1,6 +1,6 @@
 package br.com.roger.study.casadocodigo.controller;
 
-import br.com.roger.study.casadocodigo.controller.request.NovoLivroRequest;
+import br.com.roger.study.casadocodigo.controller.request.LivroCreateRequest;
 import br.com.roger.study.casadocodigo.controller.response.LivroDetalheResponse;
 import br.com.roger.study.casadocodigo.controller.response.LivroIdentificacaoResponse;
 import br.com.roger.study.casadocodigo.model.Livro;
@@ -34,7 +34,7 @@ public class LivroController {
 
     @Transactional
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody @Valid final NovoLivroRequest request) {
+    public ResponseEntity<?> create(@RequestBody @Valid final LivroCreateRequest request) {
 
         final Livro novoLivro = request.toModel(em);
 

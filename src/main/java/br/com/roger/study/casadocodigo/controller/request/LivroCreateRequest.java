@@ -21,7 +21,7 @@ import java.time.LocalDate;
  * Carga: 4
  */
 
-public class NovoLivroRequest {
+public class LivroCreateRequest {
 
     @NotBlank(message = "cdc.livro.titulo.obrigatorio")
     @Unique(clazz = Livro.class, field = "titulo") //O atributo message poderia se passado aqui e sobrescrito o default
@@ -62,9 +62,12 @@ public class NovoLivroRequest {
      * Tudo bem nao colocar o atributo message no construtor. Vai ser usado o anotado no atributo.
      * Podemos apenas deixar a dica
      */
-    public NovoLivroRequest(@NotBlank String titulo, @NotBlank @Length(max = 500) String resumo, String sumario,
-            @NotNull @Min(value = 20) BigDecimal preco, @NotNull @Min(value = 100) Integer numeroPaginas, @NotBlank String isbn,
-            @NotNull @Future LocalDate dataPublicacao, @NotNull @ExistsId(clazz = Categoria.class) Long idCategoria, @NotNull @ExistsId(clazz = Autor.class) Long idAutor) {
+    public LivroCreateRequest(@NotBlank String titulo, @NotBlank @Length(max = 500) String resumo, String sumario,
+                              @NotNull @Min(value = 20) BigDecimal preco, @NotNull @Min(value = 100) Integer numeroPaginas, @NotBlank String isbn,
+                              @NotNull @Future LocalDate dataPublicacao, @NotNull Long idCategoria, @NotNull Long idAutor) {
+
+        assertArguments(titulo, resumo, preco, numeroPaginas, isbn, dataPublicacao, idCategoria, idAutor);
+
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
@@ -74,6 +77,20 @@ public class NovoLivroRequest {
         this.dataPublicacao = dataPublicacao;
         this.idCategoria = idCategoria;
         this.idAutor = idAutor;
+    }
+
+    private void assertArguments(String titulo, String resumo, BigDecimal preco, Integer numeroPaginas, String isbn, LocalDate dataPublicacao, Long idCategoria, Long idAutor) {
+        Assert.hasText(titulo, "O titulo não pode ser vazio");
+        Assert.hasText(resumo,"O resumo não pode ser vazio");
+        Assert.isTrue(resumo.length() <= 500,"O resumo deve ter no máximo 500 caracteres");
+        Assert.notNull(preco,"O preço não pode ser nulo");
+        Assert.isTrue(preco.compareTo(BigDecimal.valueOf(20.0)) >= 0, "O preço mínimo é 20");
+        Assert.notNull(numeroPaginas,"O número de páginas não pode ser nulo");
+        Assert.hasText(isbn,"O ISBN não pode ser vazio");
+        Assert.notNull(dataPublicacao,"A data de publicação não pode ser nula");
+        Assert.isTrue(dataPublicacao.isAfter(LocalDate.now()),"A data de publicação deve estar no futuro");
+        Assert.notNull(idCategoria,"O id da categoria não pode ser nulo");
+        Assert.notNull(idAutor,"O id do autor não pode ser nulo");
     }
 
     //1

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * Carga intrinseca: 1
  */
-public class NovoAutorRequest {
+public class AutorCreateRequest {
 
     @NotBlank(message = "cdc.autor.nome.obrigatorio")
     private String nome;

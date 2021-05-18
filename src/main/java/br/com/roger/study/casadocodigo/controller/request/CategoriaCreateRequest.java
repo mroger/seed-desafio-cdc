@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
  * Carga: 1
  */
 
-public class NovaCategoriaRequest {
+public class CategoriaCreateRequest {
 
     @Unique(clazz = Categoria.class, field = "nome")
     @NotBlank(message = "cdc.categoria.nome.obrigatorio")
