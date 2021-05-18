@@ -3,6 +3,7 @@ package br.com.roger.study.casadocodigo.controller.request;
 import br.com.roger.study.casadocodigo.controller.validator.Unique;
 import br.com.roger.study.casadocodigo.model.Autor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.util.Assert;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -25,6 +26,11 @@ public class AutorCreateRequest {
     private String descricao;
 
     public Autor toModel() {
+        Assert.hasText(nome,"O nome deve ser fornecido");
+        Assert.hasText(email,"O email deve ser fornecido");
+        Assert.hasText(descricao,"A descricao deve ser fornecida");
+        Assert.isTrue(descricao.length() <= 400,"A descrição deve ter no máximo 400 caracteres");
+
         return new Autor(nome, email, descricao);
     }
 
