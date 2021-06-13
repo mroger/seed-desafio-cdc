@@ -95,6 +95,8 @@ public class LivroCreateRequest {
 
     //1
     public Livro toModel(EntityManager em) {
+        //Checar pre-condicao
+
         //1
         @NotNull Autor autor = em.find(Autor.class, idAutor);
         Assert.state(autor != null, "Não foi encontrado autor para associar ao Livro: " + idAutor);

@@ -49,7 +49,7 @@ public class Autor {
         Assert.hasLength(nome, "O nome do autor é obrigatório");
         Assert.hasLength(email, "O email do autor é obrigatório");
         Assert.hasLength(descricao, "A descricao do autor é obrigatória");
-        Assert.isTrue(descricao.length() > 400, "A descrição do Autor deve ter no máximo 400 caracteres");
+        Assert.isTrue(descricao.length() <= 400, "A descrição do Autor deve ter no máximo 400 caracteres");
     }
 
     public Long getId() {

@@ -29,8 +29,12 @@ public class PedidoCreateRequest {
 
     @NotEmpty(message = "cdc.pagamento.carrinho.itens.obrigatorio")
     @Valid
-    //1
     private List<ItemPedidoCreateRequest> itens;
+
+    public PedidoCreateRequest(BigDecimal total, List<ItemPedidoCreateRequest> itens) {
+        this.total = total;
+        this.itens = itens;
+    }
 
     public BigDecimal getTotal() {
         return total;
@@ -43,6 +47,7 @@ public class PedidoCreateRequest {
     //1
     //1
     public Function<Compra, Pedido> toModel(EntityManager em) {
+        //Checar pre-condicao
 
         //1
         //1

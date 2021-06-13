@@ -26,6 +26,8 @@ public class Categoria {
     public Categoria() { }
 
     public Categoria(@NotEmpty final String nome) {
+        //Checar pre-condicao
+
         this.nome = nome;
     }
 

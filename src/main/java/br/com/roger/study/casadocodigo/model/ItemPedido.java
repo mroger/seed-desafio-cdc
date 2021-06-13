@@ -48,6 +48,8 @@ public class ItemPedido {
     }
 
     public ItemPedido(Livro livro, Integer quantidade) {
+        //Checar pre-condicao
+
         this.livro = livro;
         this.quantidade = quantidade;
         //Nos protegendo caso o preco no livro mude

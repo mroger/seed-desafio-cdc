@@ -34,6 +34,8 @@ public class Estado {
     public Estado() { }
 
     public Estado(@NotBlank String nome, @NotNull Pais pais) {
+        //Checar pre-condicao
+
         this.nome = nome;
         this.pais = pais;
     }

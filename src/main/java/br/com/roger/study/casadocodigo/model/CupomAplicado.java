@@ -44,6 +44,7 @@ public class CupomAplicado {
         Assert.notNull(cupom, "O cupom aplicado deve existir");
         Assert.notNull(cupom.getDesconto(), "O desconto deve estar definido");
         Assert.notNull(cupom.getValidade(), "A validade deve estar definida");
+
         this.cupom = cupom;
         this.desconto = cupom.getDesconto();
         this.validade = cupom.getValidade();

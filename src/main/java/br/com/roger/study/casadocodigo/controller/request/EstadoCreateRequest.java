@@ -26,6 +26,8 @@ public class EstadoCreateRequest {
 
     //1
     public Estado toModel(EntityManager em) {
+        //Checar pre-condicao
+
         //1
         Pais pais = em.find(Pais.class, idPais);
         Assert.notNull(pais, "O Pais não foi encontrado no banco");

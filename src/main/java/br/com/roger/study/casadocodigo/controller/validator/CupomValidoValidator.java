@@ -7,7 +7,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.time.LocalDate;
 
 /**
  * Carga: 5
@@ -36,18 +35,17 @@ public class CupomValidoValidator implements ConstraintValidator<CupomValido, St
                 .setParameter("codigoCupom", codigoCupom)
                 .getSingleResult();
 
-            return cupom.getValidade().equals(LocalDate.now()) ||
-                cupom.getValidade().isAfter(LocalDate.now());
+            return cupom.valido();
         //1
         } catch (NoResultException e) {
-            changeMessageTemplate(context);
+            changeMessageTemplate(context, "cdc.cupom.naoencontrado");
             return false;
         }
     }
 
-    private void changeMessageTemplate(ConstraintValidatorContext context) {
+    private void changeMessageTemplate(ConstraintValidatorContext context, String template) {
         context.disableDefaultConstraintViolation();
-        context.buildConstraintViolationWithTemplate("cdc.cupom.naoencontrado")
+        context.buildConstraintViolationWithTemplate(template)
             .addConstraintViolation();
     }
 }

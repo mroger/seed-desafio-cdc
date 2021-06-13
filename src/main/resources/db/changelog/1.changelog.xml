@@ -221,4 +221,7 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="202106052235" author="marcos">
+        <modifyDataType tableName="livro" columnName="resumo" newDataType="varchar(500)"/>
+    </changeSet>
 </databaseChangeLog>

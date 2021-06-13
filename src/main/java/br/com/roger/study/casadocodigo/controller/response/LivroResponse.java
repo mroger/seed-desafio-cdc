@@ -9,6 +9,7 @@ public class LivroResponse {
     private String titulo;
 
     public static LivroResponse fromModel(Livro livro) {
+        //TODO: Usar BeanUtils para copiar as propriedades?
         LivroResponse livroResponse = new LivroResponse();
         livroResponse.setId(livro.getId());
         livroResponse.setTitulo(livro.getTitulo());

@@ -16,6 +16,8 @@ public class PaisCreateRequest {
     private String nome;
 
     public Pais toModel() {
+        //Checar pre-condicao
+
         return new Pais(nome);
     }
 

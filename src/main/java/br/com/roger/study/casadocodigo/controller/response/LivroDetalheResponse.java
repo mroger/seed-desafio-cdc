@@ -1,6 +1,7 @@
 package br.com.roger.study.casadocodigo.controller.response;
 
 import br.com.roger.study.casadocodigo.model.Livro;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ public class LivroDetalheResponse {
 
     private final String sumario;
 
+    @JsonSerialize(using = PriceSerializer.class)
     private final BigDecimal preco;
 
     private final Integer numeroPaginas;
@@ -30,6 +32,7 @@ public class LivroDetalheResponse {
 
     //1
     public LivroDetalheResponse(final Livro livro) {
+        //TODO: Usar BeanUtils para copiar as propriedades?
         this.titulo = livro.getTitulo();
         this.resumo = livro.getResumo();
         this.sumario = livro.getSumario();

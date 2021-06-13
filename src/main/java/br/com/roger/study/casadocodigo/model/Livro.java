@@ -36,6 +36,7 @@ public class Livro {
     private String titulo;
 
     @NotBlank
+    @Length(max = 500)
     private String resumo;
 
     private String sumario;
@@ -72,6 +73,8 @@ public class Livro {
             @NotNull @Min(value = 100) Integer numeroPaginas, @NotBlank @Unique(clazz = Livro.class, field = "isbn") String isbn,
             @NotNull @Future LocalDate dataPublicacao, @NotNull @ExistsId(clazz = Categoria.class) Categoria categoria,
             @NotNull @ExistsId(clazz = Autor.class) Autor autor) {
+        //Checar pre-condicao
+
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;

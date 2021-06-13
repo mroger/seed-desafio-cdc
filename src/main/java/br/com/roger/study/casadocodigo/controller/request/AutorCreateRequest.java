@@ -25,6 +25,12 @@ public class AutorCreateRequest {
     @Length(max = 400, message = "cdc.autor.descricao.maximo")
     private String descricao;
 
+    public AutorCreateRequest(@NotBlank String nome, @NotBlank @Email String email, @NotBlank String descricao) {
+        this.nome = nome;
+        this.email = email;
+        this.descricao = descricao;
+    }
+
     public Autor toModel() {
         Assert.hasText(nome,"O nome deve ser fornecido");
         Assert.hasText(email,"O email deve ser fornecido");

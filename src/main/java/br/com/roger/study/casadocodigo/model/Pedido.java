@@ -44,6 +44,7 @@ public class Pedido {
 
     public Pedido(@Size(min = 1) List<ItemPedido> itens, @NotNull @Valid Compra compra) {
         Assert.notEmpty(itens, "Um pedido precisa ter itens");
+        Assert.notNull(compra, "A compra não pode ser nula");
 
         this.itens = itens;
         this.compra = compra;

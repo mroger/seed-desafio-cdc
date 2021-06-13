@@ -62,7 +62,7 @@ public class CompraCreateRequest {
     //1
     public Compra toModel(EntityManager em) {
         //1
-        @NotNull Pais pais = em.find(Pais.class, idPais);
+        @NotNull final Pais pais = em.find(Pais.class, idPais);
         Assert.state(pais != null, "Não foi encontrado país para associar à Compra: " + idPais);
 
         //1

@@ -84,7 +84,8 @@ public class Compra {
     private Compra(String email, String nome, String sobrenome, String documento, String endereco, String complemento,
             String cidade, String telefone, String cep, Pais pais, Estado estado, CupomAplicado cupomAplicado,
             Function<Compra, Pedido> fabricaPedidos) {
-        //TODO Asserts para estado, pais e cupom
+        //Checar pre-condicao
+
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -110,7 +111,8 @@ public class Compra {
 
     public BigDecimal getValorFinal() {
         return cupomAplicado != null ?
-            getValorOriginal().subtract(getValorOriginal().multiply(getDescontoAplicado().divide(BigDecimal.valueOf(100), 3, RoundingMode.HALF_DOWN))):
+            getValorOriginal()
+                .subtract(getValorOriginal().multiply(getDescontoAplicado().divide(BigDecimal.valueOf(100), 3, RoundingMode.HALF_DOWN))):
             null;
     }
 

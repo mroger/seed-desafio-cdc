@@ -23,20 +23,25 @@ public class ItemPedidoCreateRequest {
     @Min(value = 1, message = "cdc.pagamento.carrinho.itens.livro.quantidade.minimo")
     private Integer quantidade;
 
+    public ItemPedidoCreateRequest(long idLivro, Integer quantidade) {
+        this.idLivro = idLivro;
+        this.quantidade = quantidade;
+    }
+
+    public ItemPedido toModel(EntityManager em) {
+        //Checar pre-condicao
+
+        @NotNull final Livro livro = em.find(Livro.class, idLivro);
+        Assert.state(livro != null, "O livro colocado no carrinho não está cadastrado: " + idLivro);
+
+        return new ItemPedido(livro, quantidade);
+    }
+
     public Long getIdLivro() {
         return idLivro;
     }
 
     public Integer getQuantidade() {
         return quantidade;
-    }
-
-    //1
-    public ItemPedido toModel(EntityManager em) {
-        //1
-        @NotNull final Livro livro = em.find(Livro.class, idLivro);
-        Assert.state(livro != null, "O livro colocado no carrinho não está cadastrado: " + idLivro);
-
-        return new ItemPedido(livro, quantidade);
     }
 }

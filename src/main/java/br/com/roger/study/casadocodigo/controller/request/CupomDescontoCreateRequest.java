@@ -4,7 +4,7 @@ import br.com.roger.study.casadocodigo.controller.validator.Unique;
 import br.com.roger.study.casadocodigo.model.Cupom;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,11 +24,13 @@ public class CupomDescontoCreateRequest {
     private BigDecimal desconto;
 
     @NotNull(message = "cdc.cupom.validade.obrigatorio")
-    @Future(message = "cdc.cupom.validade.futuro")
+    @FutureOrPresent(message = "cdc.cupom.validade.futuro")
     private LocalDate validade;
 
     //1
     public Cupom toModel() {
+        //Checar pre-condicao
+
         return new Cupom(codigo, desconto, validade);
     }
 

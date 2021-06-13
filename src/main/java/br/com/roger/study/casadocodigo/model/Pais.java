@@ -33,6 +33,8 @@ public class Pais {
     public Pais() { }
 
     public Pais(@NotBlank @Unique(clazz = Pais.class, field = "nome") String nome) {
+        //Checar pre-condicao
+
         Assert.hasLength(nome, "O nome do País é obrigatório");
         this.nome = nome;
     }
